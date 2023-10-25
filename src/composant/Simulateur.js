@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import ExplanationContainerF from './NeedTecnoland'
 
 const Container = styled.div`
   display: flex;
@@ -63,34 +64,22 @@ const CalculatorContainer = styled.div`
   }
 `;
 
-const ExplanationContainer = styled.div`
+const Colonnes = styled.div`
   flex: 1;
   padding: 20px;
-  background-color: #f9f9f9;
   border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   flex-wrap:wrap;
-
-  h2 {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 20px;
-  }
-
-  p {
-    font-size: 18px;
-    color: #555;
-    line-height: 1.4;
-  }
-  @media (max-width: 768px) {
-    width:100%;
-  }
+  display:flex;
+  flex-direction:column;
+  gap:30px;
+  align-content:center;
+  width:80%;
 `;
 
 export default function TempMaintienCalculator() {
   const [diamTuyauterie, setDiamTuyauterie] = useState('');
   const [epaisseur, setEpaisseur] = useState('');
-  const [lambda, setLambda] = useState('');
+  const [lambda, setLambda] = useState(0.83);
   const [tempMaintien, setTempMaintien] = useState('');
   const [tempMini, setTempMini] = useState('');
   const [resultat, setResultat] = useState('');
@@ -119,73 +108,78 @@ export default function TempMaintienCalculator() {
   };
 
   return (
-    <Container>
-      <CalculatorContainer>
-        <h1>Maintien en température</h1>
-        <p>
-          <label htmlFor="diam_tuyauterie">Diamètre de la tuyauterie (mm)</label>
-          <input
-            type="number"
-            id="diam_tuyauterie"
-            className="input-field"
-            value={diamTuyauterie}
-            onChange={(e) => setDiamTuyauterie(e.target.value)}
-          />
-        </p>
-        <p>
-          <label htmlFor="epaisseur">Épaisseur de calorifuge (mm)</label>
-          <input
-            type="number"
-            id="epaisseur"
-            className="input-field"
-            value={epaisseur}
-            onChange={(e) => setEpaisseur(e.target.value)}
-          />
-        </p>
-        <p>
-          <label htmlFor="lambda">Lambda calorifuge</label>
-          <input
-            type="number"
-            id="lambda"
-            className="input-field"
-            value={lambda}
-            onChange={(e) => setLambda(e.target.value)}
-          />
-        </p>
-        <p>
-          <label htmlFor="temp_maintien">Température de maintien</label>
-          <input
-            type="number"
-            id="temp_maintien"
-            className="input-field"
-            value={tempMaintien}
-            onChange={(e) => setTempMaintien(e.target.value)}
-          />
-        </p>
-        <p>
-          <label htmlFor="temp_mini">Température mini ambiante</label>
-          <input
-            type="number"
-            id="temp_mini"
-            className="input-field"
-            value={tempMini}
-            onChange={(e) => setTempMini(e.target.value)}
-          />
-        </p>
-        <button onClick={handleCalculate}>Calculer</button>
-        <br />
-        <p>
-          <label htmlFor="resultat">Résultat : </label>
-          <input type="number" id="resultat" value={resultat} readOnly />
-        </p>
-      </CalculatorContainer>
-      <ExplanationContainer>
-        <h2>Comment utiliser le simulateur</h2>
-        <p>
-          Ici, vous pouvez ajouter des explications sur la façon d'utiliser le simulateur. Expliquez les étapes, les valeurs nécessaires, et fournissez des conseils pour obtenir des résultats précis.
-        </p>
-        {/* Ajoutez plus d'explications au besoin */}
-      </ExplanationContainer>
-    </Container>
+        <Container>
+            <CalculatorContainer>
+                <h1>Maintien en température</h1>
+                <p>
+                <label htmlFor="diam_tuyauterie">Diamètre de la tuyauterie (mm)</label>
+                <input
+                    type="number"
+                    id="diam_tuyauterie"
+                    className="input-field"
+                    value={diamTuyauterie}
+                    onChange={(e) => setDiamTuyauterie(e.target.value)}
+                />
+                </p>
+                <p>
+                <label htmlFor="epaisseur">Épaisseur de calorifuge (mm)</label>
+                <input
+                    type="number"
+                    id="epaisseur"
+                    className="input-field"
+                    value={epaisseur}
+                    onChange={(e) => setEpaisseur(e.target.value)}
+                />
+                </p>
+                <p>
+                <label htmlFor="lambda">Lambda calorifuge</label>
+                <input
+                    type="number"
+                    id="lambda"
+                    className="input-field"
+                    value={lambda}
+                    onChange={(e) => setLambda(e.target.value)}
+                    readOnly
+                />
+                </p>
+                <p>
+                <label htmlFor="temp_maintien">Température de maintien</label>
+                <input
+                    type="number"
+                    id="temp_maintien"
+                    className="input-field"
+                    value={tempMaintien}
+                    onChange={(e) => setTempMaintien(e.target.value)}
+                />
+                </p>
+                <p>
+                <label htmlFor="temp_mini">Température mini ambiante</label>
+                <input
+                    type="number"
+                    id="temp_mini"
+                    className="input-field"
+                    value={tempMini}
+                    onChange={(e) => setTempMini(e.target.value)}
+                />
+                </p>
+                <button onClick={handleCalculate}>Calculer</button>
+                <br />
+                <p>
+                <label htmlFor="resultat">Résultat : </label>
+                <input type="number" id="resultat" value={resultat} readOnly />
+                </p>
+            </CalculatorContainer>
+            <Colonnes>
+                <ExplanationContainerF
+                titre="Comment utiliser le simulateur"
+                description="Ici, vous pouvez ajouter des explications sur la façon d'utiliser le simulateur. Expliquez les étapes, les valeurs nécessaires, et fournissez des conseils pour obtenir des résultats précis."
+                />
+                <ExplanationContainerF
+                logoTecno="yes"
+                titre="Demandez votre devis gratuitement"
+                description="Spécialiste conseils et fourniture de matériel en Instrumentation, Détection, Sécurité Machine et Automatisme Industriel pour toutes les industries et spécialiste IO-Link."
+                />
+            </Colonnes>   
+        </Container>
   );
 }

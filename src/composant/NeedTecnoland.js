@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 const ExplanationContainer = styled.div`
@@ -8,6 +8,9 @@ const ExplanationContainer = styled.div`
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   flex-wrap:wrap;
+  .logo {
+    width:100%;
+  }
   h2 {
     font-size: 24px;
     color: #333;
@@ -32,7 +35,7 @@ export default function ExplanationContainerF({titre, description, logoTecno}) {
             </p>
 
             {
-                logoTecno ==="yes" && <img  src="https://www.tecnoland.fr/wp-content/themes/plune-refonte/assets/img/logo.png"/>
+                logoTecno ==="yes" && <img className='logo' src="https://www.tecnoland.fr/wp-content/themes/plune-refonte/assets/img/logo.png"/>
             }
         </ExplanationContainer>
   );

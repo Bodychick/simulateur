@@ -13,7 +13,6 @@ const Sidebar = styled.div`
   left: 0;
 
   nav {
-    max-width: 100%;
     padding: 10px 15px;
     h1 {
       margin: 0;
@@ -49,22 +48,41 @@ const Sidebar = styled.div`
   }
 
   .menuToggle {
-    max-height: ${props => (props.isMenuOpen ? "400px" : "0")};
+    height: auto;
     overflow: hidden;
     transition: max-height 0.3s ease;
-    margin:0;
+    margin: 0;
+  }
+
+  .hideDesktop {
+    display: none;
+    height: auto;
   }
 
   @media (max-width: 768px) {
     width: 100%;
-    height: auto;
+    max-width:100%;
+    height:${props => (props.isMenuOpen ? "100%" : "60px")};;
     top: 0;
+    .hideDesktop {
+      display: block;
+      height: auto;
+    }
+
     button {
       display: block;
       position: absolute;
       top: 10px;
       left: 10px;
       z-index: 1;
+    }
+
+    .menuToggle {
+      max-height: 0;
+    }
+
+    .menuToggle .open {
+      max-height: 500px !important;
     }
   }
 `;
@@ -74,28 +92,49 @@ export default function SideBar() {
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+    const menuToggle = document.querySelector('.menuToggle');
+    console.log(menuToggle.classList.contains('open'))
+    if(menuToggle.classList.contains('open')){
+      menuToggle.classList.remove('open');
+    }
+    else {
+      menuToggle.classList.add('open');
+    }
   };
 
   return (
     <Sidebar isMenuOpen={isMenuOpen}>
+      <button className="hideDesktop" onClick={toggleMenu}>
+        <i className="fa-solid fa-bars"></i>
+      </button>
       <nav>
         <h1>
           <a href="/">Tecnoland</a>
         </h1>
-        <button onClick={toggleMenu}>
-          <i className="fa-solid fa-bars"></i>
-        </button>
-
         <div className="menuToggle">
           <ul>
             <li>
-              <a href="/">Accueil</a>
+              <a href="/">Accueil 2</a>
             </li>
             <li>
               <a href="/temp-maintien">Maintien en température</a>
             </li>
           </ul>
         </div>
+    {
+      isMenuOpen === true &&
+      <div className="hideDesktop">
+      <ul>
+        <li>
+          <a href="/">Accueil</a>
+        </li>
+        <li>
+          <a href="/temp-maintien">Maintien en température</a>
+        </li>
+      </ul>
+    </div>
+    }
+
       </nav>
     </Sidebar>
   );

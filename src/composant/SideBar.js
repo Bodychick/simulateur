@@ -114,10 +114,13 @@ export default function SideBar() {
         <div className="menuToggle">
           <ul>
             <li>
-              <a href="/">Accueil 2</a>
+              <a href="/">Accueil</a>
             </li>
             <li>
               <a href="/temp-maintien">Maintien en température</a>
+            </li>
+            <li>
+              <a href="/chauffage-liquide-solide-gaz">Chauffage liquide solide gaz</a>
             </li>
           </ul>
         </div>
@@ -130,6 +133,9 @@ export default function SideBar() {
         </li>
         <li>
           <a href="/temp-maintien">Maintien en température</a>
+        </li>
+        <li>
+          <a href="/chauffage-liquide-solide-gaz">Chauffage liquide solide gaz</a>
         </li>
       </ul>
     </div>
